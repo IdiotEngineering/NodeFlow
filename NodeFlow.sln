@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeFlow.UnitTests", "NodeF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeFlow.Core.Module", "NodeFlow.Core.Module\NodeFlow.Core.Module.csproj", "{56EBD50F-FD4D-4549-9D1A-A26764B39ADE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeFlow.Cli", "NodeFlow.Cli\NodeFlow.Cli.csproj", "{FEA9D5EC-4538-4895-B77D-05AE06E52622}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{56EBD50F-FD4D-4549-9D1A-A26764B39ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56EBD50F-FD4D-4549-9D1A-A26764B39ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56EBD50F-FD4D-4549-9D1A-A26764B39ADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEA9D5EC-4538-4895-B77D-05AE06E52622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEA9D5EC-4538-4895-B77D-05AE06E52622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEA9D5EC-4538-4895-B77D-05AE06E52622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEA9D5EC-4538-4895-B77D-05AE06E52622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

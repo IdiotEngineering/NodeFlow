@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NodeFlow.Core.Utilities;
 
 namespace NodeFlow.Core.Nodes
 {
@@ -36,5 +37,25 @@ namespace NodeFlow.Core.Nodes
       {typeof (Enum), NEnum},
       {typeof (Object), NObject}
     };
+
+    public static Dictionary<NType, Type> NTypeToCSharpTypeMap = new Dictionary<NType, Type>
+    {
+      {NNumber, typeof (Int32)},
+      {NFloat, typeof (Single)},
+      {NString, typeof (String)},
+      {NBoolean, typeof (Boolean)},
+      {NEnum, typeof (Enum)},
+      {NObject, typeof (Object)}
+    };
+
+    public static NType GetNTypeFromSystemType(Type type)
+    {
+      return CSharpToNTypeMap.GetValueOrDefault(type.GetElementType() ?? type);
+    }
+
+    public static Type GetSystemTypeFromNType(NType nType)
+    {
+      return NTypeToCSharpTypeMap[nType];
+    }
   }
 }

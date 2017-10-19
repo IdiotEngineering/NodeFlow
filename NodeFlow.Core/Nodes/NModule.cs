@@ -66,12 +66,12 @@ namespace NodeFlow.Core.Nodes
         var nFunction = method.GetCustomAttribute<NFunction>();
         var displayName = nFunction.DisplayName ?? method.Name.Humanize(LetterCasing.Title);
         // Create the node definition
-        var nodeDefinition = new NNodeDefinition(null, module, displayName, nFunction.Description, method.Name);
+        var nodeDefinition = new NNodeDefinition(null, module, displayName, nFunction.Description, method.DeclaringType?.FullName + '.' + method.Name);
         module.Functions.Add(nodeDefinition);
         // Parameters (Input and Output)
         foreach (var parameter in method.GetParameters())
         {
-          var nType = NPrimitives.CSharpToNTypeMap.GetValueOrNull(parameter.ParameterType);
+          var nType = NPrimitives.GetNTypeFromSystemType(parameter.ParameterType);
           if (nType == null)
             throw new Exception("Failed to load unknown primitive type: " + parameter.ParameterType.FullName);
           (parameter.IsOut ? nodeDefinition.ReturnParameters : nodeDefinition.InputParameters).Add(

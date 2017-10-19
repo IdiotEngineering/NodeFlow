@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NodeFlow.Core.Nodes;
+using NodeFlow.Core.Utilities;
 
 namespace NodeFlow.Core.Graph
 {
@@ -9,6 +10,12 @@ namespace NodeFlow.Core.Graph
   public class NNode
   {
     #region Fields / Properties
+
+    /// <summary>
+    ///   The GUID for this node, assigned from the NGraph. This is used to referance this node
+    ///   while generating code and for things like serialization.
+    /// </summary>
+    public ShortGuid Guid;
 
     /// <summary>
     ///   The definition of the node (this is akin to it's "type").
@@ -25,15 +32,13 @@ namespace NodeFlow.Core.Graph
     /// <summary>
     ///   Bound input parameters. Optional parameters don't need to be bound.
     /// </summary>
-    public Dictionary<NParameter, NParameterBinding> InputParameterBindings =
-      new Dictionary<NParameter, NParameterBinding>();
+    public List<NParameterBinding> InputParameterBindings = new List<NParameterBinding>();
 
     /// <summary>
     ///   Bound output parameters. Optional parameters don't need to be bound. Note that this
     ///   is a one to many relationship.
     /// </summary>
-    public Dictionary<NParameter, List<NParameterBinding>> ReturnParameterBindings =
-      new Dictionary<NParameter, List<NParameterBinding>>();
+    public List<NParameterBinding> ReturnParameterBindings = new List<NParameterBinding>();
 
     /// <summary>
     ///   All possible control flow inputs. Zero or more of them may actually be used.
@@ -49,5 +54,11 @@ namespace NodeFlow.Core.Graph
       new Dictionary<NControlFlowParameter, NNode>();
 
     #endregion
+
+    public string GenerateCode()
+    {
+      // Support return types
+      return string.Format("private void {0}() {{ {1}(); }}", Guid, NodeDefinition.SymbolName);
+    }
   }
 }

@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{72B6DD5A-00F9-4E47-81F1-75D3FEF1C709}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{FEA9D5EC-4538-4895-B77D-05AE06E52622}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NodeFlow.Core</RootNamespace>
-    <AssemblyName>NodeFlow.Core</AssemblyName>
+    <RootNamespace>NodeFlow.Cli</RootNamespace>
+    <AssemblyName>NodeFlow.Cli</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,14 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Handlebars, Version=1.8.1.0, Culture=neutral, PublicKeyToken=22225d0bf33cd661, processorArchitecture=MSIL">
-      <HintPath>..\packages\Handlebars.Net.1.9.0\lib\net40\Handlebars.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Humanizer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Humanizer.Core.2.2.0\lib\netstandard1.0\Humanizer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,25 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Annotations\NFunction.cs" />
-    <Compile Include="Graph\CSharpCodeGenerator.cs" />
-    <Compile Include="Graph\NGeneratedGraph.cs" />
-    <Compile Include="Graph\NGraph.cs" />
-    <Compile Include="Graph\NParameterBinding.cs" />
-    <Compile Include="Nodes\NControlFlowParameter.cs" />
-    <Compile Include="Nodes\NModule.cs" />
-    <Compile Include="Graph\NNode.cs" />
-    <Compile Include="Nodes\NNodeDefinition.cs" />
-    <Compile Include="Nodes\NType.cs" />
-    <Compile Include="Nodes\NParameter.cs" />
-    <Compile Include="Nodes\NPrimitiveTypes.cs" />
+    <Compile Include="Generated.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\Extensions.cs" />
-    <Compile Include="Utilities\ShortSymbolGenerator.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NodeFlow.Core.Module\NodeFlow.Core.Module.csproj">
+      <Project>{56ebd50f-fd4d-4549-9d1a-a26764b39ade}</Project>
+      <Name>NodeFlow.Core.Module</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NodeFlow.Core\NodeFlow.Core.csproj">
+      <Project>{72b6dd5a-00f9-4e47-81f1-75d3fef1c709}</Project>
+      <Name>NodeFlow.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

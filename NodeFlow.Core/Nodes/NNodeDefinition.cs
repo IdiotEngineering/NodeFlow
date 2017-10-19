@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Humanizer;
 
 namespace NodeFlow.Core.Nodes
@@ -46,6 +47,11 @@ namespace NodeFlow.Core.Nodes
     #region Fields / Properties
 
     /// <summary>
+    ///   The node definition GUID.
+    /// </summary>
+    public Guid Guid = Guid.NewGuid();
+
+    /// <summary>
     ///   The scope that this node (function) can be run under. If set to NNull, then this is a global
     ///   node that can be run anywhere (like built-in functions) assuming one of it's input types
     ///   matches the binding type.
@@ -83,16 +89,22 @@ namespace NodeFlow.Core.Nodes
     public List<NParameter> ReturnParameters = new List<NParameter>();
 
     /// <summary>
-    /// Sets the type of call (input control flow) sequencing for this node. Explicit for things that are
-    /// called, Implcicit for things that need to be called when their value is fetched (properties).
+    ///   Sets the type of call (input control flow) sequencing for this node. Explicit for things that are
+    ///   called, Implcicit for things that need to be called when their value is fetched (properties).
     /// </summary>
     public NCallSequencing CallSequencing = NCallSequencing.Explicit;
 
     /// <summary>
-    /// Sets the type of continuation (output control flow) sequencing for this node. Can have zero, one
-    /// or many control continuation modes.
+    ///   Sets the type of continuation (output control flow) sequencing for this node. Can have zero, one
+    ///   or many control continuation modes.
     /// </summary>
     public NContinuationSequencing ContinuationSequencing = NContinuationSequencing.Singular;
+
+    /// <summary>
+    ///   Optional continuation parameters. These are used if a node has explicit continuation set (takes in
+    ///   Action parameters).
+    /// </summary>
+    public List<NControlFlowParameter> ContinuationParameters = new List<NControlFlowParameter>();
 
     #endregion
 
