@@ -1,15 +1,16 @@
-﻿using System.Linq;
+﻿using Newtonsoft.Json;
 
 namespace NodeFlow.Core.Utilities
 {
   /// <summary>
   ///   Simple short Guid representation.
   /// </summary>
+  [JsonObject(MemberSerialization.OptIn)]
   public struct ShortGuid
   {
     #region Fields / Properties
 
-    private readonly string _value;
+    [JsonProperty] private readonly string _value;
 
     #endregion
 
@@ -29,12 +30,15 @@ namespace NodeFlow.Core.Utilities
   ///   A dead-basic class to generate very short symbol names (that can be used for compilation) from an
   ///   incrementing counter "NextNumberId".
   /// </summary>
+  [JsonObject(MemberSerialization.OptIn)]
   public class ShortSymbolGenerator
   {
     #region Fields / Properties
 
-    public string Predicate = "SYM_";
-    public int NextNumberId { get; private set; } = 0;
+    [JsonProperty] public string Predicate = "SYM_";
+
+    [JsonProperty]
+    public int NextNumberId { get; private set; }
 
     #endregion
 

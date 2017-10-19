@@ -5,7 +5,7 @@ using NodeFlow.Core.Nodes;
 
 namespace NodeFlow.Core.CodeGeneration
 {
-  public class CParameter
+  public class CodeParameter
   {
     #region Fields / Properties
 
@@ -34,39 +34,39 @@ namespace NodeFlow.Core.CodeGeneration
 
     #endregion
 
-    public CParameter(NParameterDefinition nParameterDefinition, NParameterBinding nParameterBinding,
-      IReadOnlyDictionary<NParameterBinding, CField> bindingsToCFields, bool isLast)
+    public CodeParameter(ParameterDefinition parameterDefinition, ParameterBinding parameterBinding,
+      IReadOnlyDictionary<ParameterBinding, CodeField> bindingsToCFields, bool isLast)
     {
-      IsOut = nParameterDefinition.IsOut;
+      IsOut = parameterDefinition.IsOut;
       NeedsComma = !isLast;
-      if (nParameterBinding == null)
+      if (parameterBinding == null)
       {
-        if (!nParameterDefinition.IsOptional && nParameterDefinition.Type != NPrimitives.NAction)
+        if (!parameterDefinition.IsOptional && parameterDefinition.Type != Primitives.NAction)
           throw new Exception("Required parameter is not bound.");
-        IsUnboundOptional = nParameterDefinition.IsOptional;
-        IsUnboundContinuation = !nParameterDefinition.IsOptional;
+        IsUnboundOptional = parameterDefinition.IsOptional;
+        IsUnboundContinuation = !parameterDefinition.IsOptional;
       }
-      else if (nParameterDefinition.Type == NPrimitives.NAction)
+      else if (parameterDefinition.Type == Primitives.NAction)
       {
         IsBoundContinuation = true;
-        FieldNameOrValue = nParameterBinding.LiteralValue;
+        FieldNameOrValue = parameterBinding.LiteralValue;
       }
-      else if (nParameterBinding.LiteralValue != null)
+      else if (parameterBinding.LiteralValue != null)
       {
         IsLiteral = true;
-        FieldNameOrValue = nParameterBinding.LiteralValue;
+        FieldNameOrValue = parameterBinding.LiteralValue;
       }
       else
       {
         IsField = true;
-        FieldNameOrValue = bindingsToCFields[nParameterBinding].Name;
+        FieldNameOrValue = bindingsToCFields[parameterBinding].Name;
       }
       // If it's bound, save some meta-data aboud it for comments and debug code generation.
-      if (nParameterBinding == null) return;
-      SourceNodeGuid = nParameterBinding.SourceNode?.Guid.ToString();
-      SourceParamDisplayName = nParameterBinding.SourceParameterDefinition?.DisplayName;
-      TargetNodeGuid = nParameterBinding.TargetNode.Guid.ToString();
-      TargetParamDisplayName = nParameterBinding.TargetParameterDefinition.DisplayName;
+      if (parameterBinding == null) return;
+      SourceNodeGuid = parameterBinding.SourceNode?.Guid.ToString();
+      SourceParamDisplayName = parameterBinding.SourceParameterDefinition?.DisplayName;
+      TargetNodeGuid = parameterBinding.TargetNode.Guid.ToString();
+      TargetParamDisplayName = parameterBinding.TargetParameterDefinition.DisplayName;
     }
   }
 }

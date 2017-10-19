@@ -38,6 +38,10 @@
       <HintPath>..\packages\Humanizer.Core.2.2.0\lib\netstandard1.0\Humanizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,23 +53,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Annotations\NFunction.cs" />
-    <Compile Include="CodeGeneration\CField.cs" />
-    <Compile Include="CodeGeneration\CGraph.cs" />
-    <Compile Include="CodeGeneration\CMethod.cs" />
-    <Compile Include="CodeGeneration\CParameter.cs" />
-    <Compile Include="Graph\CSharpCodeGenerator.cs" />
-    <Compile Include="Runtime\NGeneratedGraph.cs" />
-    <Compile Include="Graph\NGraph.cs" />
-    <Compile Include="Graph\NParameterBinding.cs" />
-    <Compile Include="Nodes\NControlFlowParameter.cs" />
-    <Compile Include="Nodes\NModuleDefinition.cs" />
-    <Compile Include="Graph\NNode.cs" />
-    <Compile Include="Nodes\NNodeDefinition.cs" />
+    <Compile Include="CodeGeneration\CodeField.cs" />
+    <Compile Include="CodeGeneration\CodeGraph.cs" />
+    <Compile Include="CodeGeneration\CodeMethod.cs" />
+    <Compile Include="CodeGeneration\CodeParameter.cs" />
+    <Compile Include="CodeGeneration\CSharpCodeGenerator.cs" />
+    <Compile Include="Runtime\GeneratedGraph.cs" />
+    <Compile Include="Graph\Graph.cs" />
+    <Compile Include="Graph\ParameterBinding.cs" />
+    <Compile Include="Nodes\ModuleDefinition.cs" />
+    <Compile Include="Graph\Node.cs" />
+    <Compile Include="Nodes\NodeDefinition.cs" />
     <Compile Include="Nodes\NType.cs" />
-    <Compile Include="Nodes\NParameterDefinition.cs" />
+    <Compile Include="Nodes\ParameterDefinition.cs" />
     <Compile Include="Nodes\NPrimitiveTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Runtime\NModule.cs" />
     <Compile Include="Runtime\NModuleRegistry.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\ShortSymbolGenerator.cs" />

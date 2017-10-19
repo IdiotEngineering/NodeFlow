@@ -1,22 +1,18 @@
-﻿using Microsoft.CSharp;
-using System;
+﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using NodeFlow.Core.Graph;
+using Microsoft.CSharp;
 
 namespace NodeFlow.Core.Runtime
 {
   public class NModuleRegistry
   {
-
     public void AddModule(string sourceCode)
     {
-      var provider = new CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } });
-      var compilerParams = new CompilerParameters {
+      var provider = new CSharpCodeProvider(new Dictionary<string, string> {{"CompilerVersion", "v4.0"}});
+      var compilerParams = new CompilerParameters
+      {
         GenerateInMemory = true,
         GenerateExecutable = false
       };
@@ -27,9 +23,9 @@ namespace NodeFlow.Core.Runtime
         throw new Exception("Mission failed!");
       var assembly = results.CompiledAssembly;
       var modules =
-        assembly.GetTypes().Where(type => type.IsClass && type.IsSubclassOf(typeof (NGeneratedGraph))).ToArray();
+        assembly.GetTypes().Where(type => type.IsClass && type.IsSubclassOf(typeof (GeneratedGraph))).ToArray();
       var sample = modules[0];
-      var instance = (NGeneratedGraph) Activator.CreateInstance(sample);
+      var instance = (GeneratedGraph) Activator.CreateInstance(sample);
     }
   }
 }

@@ -4,18 +4,17 @@ using NodeFlow.Core.Utilities;
 
 namespace NodeFlow.Core.CodeGeneration
 {
-  public class CField
+  public class CodeField
   {
     #region Fields / Properties
 
     /// <summary>
     ///   The paramater binding this field was created from.
     /// </summary>
-    public NParameterBinding ParameterBinding;
+    public ParameterBinding ParameterBinding;
 
     public string Name;
     public string QualifiedTypeName;
-
     // Used for debug code and comments
     public string SourceNodeGuid;
     public string SourceParamDisplayName;
@@ -24,11 +23,11 @@ namespace NodeFlow.Core.CodeGeneration
 
     #endregion
 
-    public CField(NParameterBinding binding, ShortSymbolGenerator generator)
+    public CodeField(ParameterBinding binding, ShortSymbolGenerator generator)
     {
       ParameterBinding = binding;
       Name = generator.GetNextGuid().ToString();
-      QualifiedTypeName = NPrimitives.GetSystemTypeFromNType(binding.SourceParameterDefinition.Type).FullName;
+      QualifiedTypeName = Primitives.GetSystemTypeFromNType(binding.SourceParameterDefinition.Type).FullName;
       SourceNodeGuid = binding.SourceNode.Guid.ToString();
       SourceParamDisplayName = binding.SourceNode.NodeDefinition.DisplayName;
       TargetNodeGuid = binding.TargetNode.Guid.ToString();

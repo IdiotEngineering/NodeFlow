@@ -1,12 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using HandlebarsDotNet;
-using NodeFlow.Core.CodeGeneration;
-using NodeFlow.Core.Nodes;
-using NodeFlow.Core.Utilities;
+﻿using HandlebarsDotNet;
+using NodeFlow.Core.Graph;
 
-namespace NodeFlow.Core.Graph
+namespace NodeFlow.Core.CodeGeneration
 {
   /// <summary>
   ///   The C# code generator.
@@ -15,11 +10,11 @@ namespace NodeFlow.Core.Graph
   {
     #region Fields / Properties
 
-    public readonly NGraph Graph;
+    public readonly Graph.Graph Graph;
     public int Indentation = 2;
 
     /// <summary>
-    ///   Rendered from a CGraph instance.
+    ///   Rendered from a CodeGraph instance.
     /// </summary>
     private readonly string _templateString =
       @"// Generated Code.
@@ -31,7 +26,7 @@ namespace NodeFlow.Core.Graph
 
 namespace NodeFlow.Generated
 {
-  public class {{ClassName}} : NodeFlow.Core.Runtime.NGeneratedGraph
+  public class {{ClassName}} : NodeFlow.Core.Runtime.GeneratedGraph
   {
     #region Fields / Properties
 
@@ -87,14 +82,14 @@ namespace NodeFlow.Generated
     {
     }
 
-    public CSharpCodeGenerator(NGraph graph)
+    public CSharpCodeGenerator(Graph.Graph graph)
     {
       Graph = graph;
     }
 
     public string Compile()
     {
-      var cGraph = new CGraph(Graph);
+      var cGraph = new CodeGraph(Graph);
       return Handlebars.Compile(_templateString)(cGraph);
     }
   }

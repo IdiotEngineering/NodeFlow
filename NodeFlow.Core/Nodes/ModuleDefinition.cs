@@ -13,14 +13,14 @@ namespace NodeFlow.Core.Nodes
   ///   A single node ModuleDefinition (akin to a Python ModuleDefinition, or a C# Assembly)
   /// </summary>
   [JsonObject(MemberSerialization.OptIn)]
-  public class NModuleDefinition
+  public class ModuleDefinition
   {
     #region Fields / Properties
 
     /// <summary>
     ///   The core ModuleDefinition that contains things like the build-in types.
     /// </summary>
-    public static readonly NModuleDefinition NCore = new NModuleDefinition("Core", "NodeFlow.Core");
+    public static readonly ModuleDefinition Core = new ModuleDefinition("Core", "NodeFlow.Core");
 
     /// <summary>
     ///   The name displayed in the node editor UI for this ModuleDefinition.
@@ -35,28 +35,28 @@ namespace NodeFlow.Core.Nodes
     /// <summary>
     ///   All function (both free and member) node definitions in this ModuleDefinition.
     /// </summary>
-    [JsonProperty] public readonly List<NNodeDefinition> Functions = new List<NNodeDefinition>();
+    [JsonProperty] public readonly List<NodeDefinition> Functions = new List<NodeDefinition>();
 
     #endregion
 
     [JsonConstructor]
     // ReSharper disable once UnusedMember.Local
-    private NModuleDefinition()
+    private ModuleDefinition()
     {
     }
 
-    private NModuleDefinition(string displayName, string qualifiedName)
+    private ModuleDefinition(string displayName, string qualifiedName)
     {
       DisplayName = displayName.Humanize(LetterCasing.Title);
       QualifiedName = qualifiedName;
     }
 
     /// <summary>
-    ///   Loads an NModuleDefinition from a C# Assembly and a full namespace path.
+    ///   Loads an ModuleDefinition from a C# Assembly and a full namespace path.
     /// </summary>
-    public static NModuleDefinition LoadFromAssemblyNamespace(Assembly assembly, string namespc)
+    public static ModuleDefinition LoadFromAssemblyNamespace(Assembly assembly, string namespc)
     {
-      var module = new NModuleDefinition(namespc.Split('.').Last(), namespc);
+      var module = new ModuleDefinition(namespc.Split('.').Last(), namespc);
       // TODO: Could do with a less inificient way of doing this
       var types = assembly.GetTypes().Where(type => type.Namespace == namespc);
       var statics = types.SelectMany(
@@ -69,13 +69,13 @@ namespace NodeFlow.Core.Nodes
         var nFunction = method.GetCustomAttribute<NFunction>();
         var displayName = nFunction.DisplayName ?? method.Name.Humanize(LetterCasing.Title);
         // Create the node definition
-        var nodeDefinition = new NNodeDefinition(null, displayName, nFunction.Description,
+        var nodeDefinition = new NodeDefinition(null, displayName, nFunction.Description,
           method.DeclaringType?.FullName + '.' + method.Name);
         module.Functions.Add(nodeDefinition);
         // Parameters (Input and Output)
         foreach (var parameter in method.GetParameters())
         {
-          nodeDefinition.Parameters.Add(new NParameterDefinition(parameter));
+          nodeDefinition.Parameters.Add(new ParameterDefinition(parameter));
         }
       }
       return module;
@@ -84,13 +84,13 @@ namespace NodeFlow.Core.Nodes
     /// <summary>
     ///   Loads the module from a json symbols file.
     /// </summary>
-    public static NModuleDefinition LoadFromJson(string json)
+    public static ModuleDefinition LoadFromJson(string json)
     {
       var contractResolver = new DefaultContractResolver
       {
         NamingStrategy = new SnakeCaseNamingStrategy()
       };
-      return JsonConvert.DeserializeObject<NModuleDefinition>(json, new JsonSerializerSettings
+      return JsonConvert.DeserializeObject<ModuleDefinition>(json, new JsonSerializerSettings
       {
         ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
         ContractResolver = contractResolver
@@ -98,7 +98,7 @@ namespace NodeFlow.Core.Nodes
     }
 
     /// <summary>
-    ///   Serializes the NModuleDefinition to a JSON symbols file.
+    ///   Serializes the ModuleDefinition to a JSON symbols file.
     /// </summary>
     public string ToJson()
     {

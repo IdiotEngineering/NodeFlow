@@ -11,11 +11,11 @@ namespace NodeFlow.Core.Graph
   ///   A complete node-flow graph.
   /// </summary>
   [JsonObject(MemberSerialization.OptIn)]
-  public class NGraph
+  public class Graph
   {
     #region Fields / Properties
 
-    [JsonProperty] public readonly Dictionary<ShortGuid, NNode> Nodes = new Dictionary<ShortGuid, NNode>();
+    [JsonProperty] public readonly Dictionary<ShortGuid, Node> Nodes = new Dictionary<ShortGuid, Node>();
 
     /// <summary>
     ///   The graph-wide GUID. Individual nodes are assigned very short UUIDs from here.
@@ -29,9 +29,9 @@ namespace NodeFlow.Core.Graph
 
     #endregion
 
-    public NNode MakeNewNode(NNodeDefinition nodeDefinition)
+    public Node MakeNewNode(NodeDefinition nodeDefinition)
     {
-      var nNode = new NNode
+      var nNode = new Node
       {
         Guid = new ShortGuid("NODE_" + (_nextNodeId++).ToSymbolString()),
         NodeDefinition = nodeDefinition

@@ -1,5 +1,5 @@
 // Generated Code.
-// Graph [ 4ed5f20a-2b3d-49d4-9649-e8b686825ca3 ]
+// Graph [ 7871648d-638d-4ef3-a055-d27146f6b93a ]
 
 // ReSharper disable CheckNamespace
 // ReSharper disable InconsistentNaming
@@ -7,19 +7,19 @@
 
 namespace NodeFlow.Generated
 {
-  public class SYM_4ed5f20a2b3d49d49649e8b686825ca3 : NodeFlow.Core.Runtime.NGeneratedGraph
+  public class SYM_7871648d638d4ef3a055d27146f6b93a : NodeFlow.Core.Runtime.GeneratedGraph
   {
     #region Fields / Properties
 
-    // [SYM_B.Begin] -> [SYM_A.Print]
+    // [NODE_B.Begin] -> [NODE_A.Print]
     public System.String FLD_A;
 
     #endregion
 
     #region Methods
     
-    // Node [Print:SYM_A]
-    public void SYM_A()
+    // Node [Print:NODE_A]
+    public void NODE_A()
     {
       NodeFlow.Core.Module.Samples.Print(
         // Value - Field
@@ -31,12 +31,12 @@ namespace NodeFlow.Generated
       );
     }
     
-    // Node [Begin:SYM_B]
-    public void SYM_B()
+    // Node [Begin:NODE_B]
+    public void NODE_B()
     {
       NodeFlow.Core.Module.Samples.Begin(
         // Start - BoundContinuation
-        SYM_A,
+        NODE_A,
         //  - UnboundContinuation
         () => {},
         // Value - Field

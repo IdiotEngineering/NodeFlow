@@ -4,21 +4,31 @@ using NodeFlow.Core.Utilities;
 
 namespace NodeFlow.Core.Nodes
 {
-  public static class NPrimitives
+  public static class Primitives
   {
     #region Fields / Properties
 
-    public static NType NNull = new NType("NNull", "NPrimitive.NNull", NModuleDefinition.NCore);
+    public static NType NNull = new NType("Null", "Primitive.Null");
 
     #endregion
 
-    public static NType NNumber = new NType("NNumber", "NPrimitive.NNumber", NModuleDefinition.NCore);
-    public static NType NFloat = new NType("NFloat", "NPrimitive.NFloat", NModuleDefinition.NCore);
-    public static NType NString = new NType("NString", "NPrimitive.NString", NModuleDefinition.NCore);
-    public static NType NBoolean = new NType("NBoolean", "NPrimitive.NBoolean", NModuleDefinition.NCore);
-    public static NType NEnum = new NType("NEnum", "NPrimitive.NEnum", NModuleDefinition.NCore);
-    public static NType NObject = new NType("NObject", "NPrimitive.NObject", NModuleDefinition.NCore);
-    public static NType NAction = new NType("NAction", "NPrimitive.NAction", NModuleDefinition.NCore);
+    public static NType GetNTypeFromSystemType(Type type)
+    {
+      return CSharpToNTypeMap.GetValueOrDefault(type.GetElementType() ?? type);
+    }
+
+    public static Type GetSystemTypeFromNType(NType nType)
+    {
+      return NTypeToCSharpTypeMap[nType.QualifiedName];
+    }
+
+    public static NType NNumber = new NType("Number", "Primitive.Number");
+    public static NType NFloat = new NType("Float", "Primitive.Float");
+    public static NType NString = new NType("String", "Primitive.String");
+    public static NType NBoolean = new NType("Boolean", "Primitive.Boolean");
+    public static NType NEnum = new NType("Enum", "Primitive.Enum");
+    public static NType NObject = new NType("Object", "Primitive.Object");
+    public static NType NAction = new NType("Action", "Primitive.Action");
 
     public static Dictionary<Type, NType> CSharpToNTypeMap = new Dictionary<Type, NType>
     {
@@ -40,25 +50,15 @@ namespace NodeFlow.Core.Nodes
       {typeof (Action), NAction}
     };
 
-    public static Dictionary<NType, Type> NTypeToCSharpTypeMap = new Dictionary<NType, Type>
+    public static Dictionary<string, Type> NTypeToCSharpTypeMap = new Dictionary<string, Type>
     {
-      {NNumber, typeof (Int32)},
-      {NFloat, typeof (Single)},
-      {NString, typeof (String)},
-      {NBoolean, typeof (Boolean)},
-      {NEnum, typeof (Enum)},
-      {NObject, typeof (Object)},
-      {NAction, typeof (Action)}
+      {NNumber.QualifiedName, typeof (Int32)},
+      {NFloat.QualifiedName, typeof (Single)},
+      {NString.QualifiedName, typeof (String)},
+      {NBoolean.QualifiedName, typeof (Boolean)},
+      {NEnum.QualifiedName, typeof (Enum)},
+      {NObject.QualifiedName, typeof (Object)},
+      {NAction.QualifiedName, typeof (Action)}
     };
-
-    public static NType GetNTypeFromSystemType(Type type)
-    {
-      return CSharpToNTypeMap.GetValueOrDefault(type.GetElementType() ?? type);
-    }
-
-    public static Type GetSystemTypeFromNType(NType nType)
-    {
-      return NTypeToCSharpTypeMap[nType];
-    }
   }
 }
