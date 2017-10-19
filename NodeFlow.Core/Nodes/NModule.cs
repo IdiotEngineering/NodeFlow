@@ -71,11 +71,7 @@ namespace NodeFlow.Core.Nodes
         // Parameters (Input and Output)
         foreach (var parameter in method.GetParameters())
         {
-          var nType = NPrimitives.GetNTypeFromSystemType(parameter.ParameterType);
-          if (nType == null)
-            throw new Exception("Failed to load unknown primitive type: " + parameter.ParameterType.FullName);
-          (parameter.IsOut ? nodeDefinition.ReturnParameters : nodeDefinition.InputParameters).Add(
-            new NParameter(parameter.Name, parameter.Name.Humanize(LetterCasing.Title), nType, parameter.Position, parameter.IsOptional));
+          nodeDefinition.Parameters.Add(new NParameter(parameter));
         }
       }
       return module;

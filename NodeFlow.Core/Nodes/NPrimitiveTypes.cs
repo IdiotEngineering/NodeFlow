@@ -18,6 +18,7 @@ namespace NodeFlow.Core.Nodes
     public static NType NBoolean = new NType("NBoolean", "NPrimitive.NBoolean", NModule.NCore);
     public static NType NEnum = new NType("NEnum", "NPrimitive.NEnum", NModule.NCore);
     public static NType NObject = new NType("NObject", "NPrimitive.NObject", NModule.NCore);
+    public static NType NAction = new NType("NAction", "NPrimitive.NAction", NModule.NCore);
 
     public static Dictionary<Type, NType> CSharpToNTypeMap = new Dictionary<Type, NType>
     {
@@ -35,7 +36,8 @@ namespace NodeFlow.Core.Nodes
       {typeof (String), NString},
       {typeof (Boolean), NBoolean},
       {typeof (Enum), NEnum},
-      {typeof (Object), NObject}
+      {typeof (Object), NObject},
+      {typeof (Action), NAction}
     };
 
     public static Dictionary<NType, Type> NTypeToCSharpTypeMap = new Dictionary<NType, Type>
@@ -45,7 +47,8 @@ namespace NodeFlow.Core.Nodes
       {NString, typeof (String)},
       {NBoolean, typeof (Boolean)},
       {NEnum, typeof (Enum)},
-      {NObject, typeof (Object)}
+      {NObject, typeof (Object)},
+      {NAction, typeof (Action)}
     };
 
     public static NType GetNTypeFromSystemType(Type type)

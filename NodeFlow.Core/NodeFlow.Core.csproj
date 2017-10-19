@@ -49,6 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Annotations\NFunction.cs" />
+    <Compile Include="CodeGeneration\CField.cs" />
+    <Compile Include="CodeGeneration\CGraph.cs" />
+    <Compile Include="CodeGeneration\CMethod.cs" />
+    <Compile Include="CodeGeneration\CParameter.cs" />
     <Compile Include="Graph\CSharpCodeGenerator.cs" />
     <Compile Include="Graph\NGeneratedGraph.cs" />
     <Compile Include="Graph\NGraph.cs" />

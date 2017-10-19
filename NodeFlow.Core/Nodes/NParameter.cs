@@ -1,4 +1,6 @@
-﻿using Humanizer;
+﻿using System;
+using System.Reflection;
+using Humanizer;
 
 namespace NodeFlow.Core.Nodes
 {
@@ -34,15 +36,32 @@ namespace NodeFlow.Core.Nodes
     /// </summary>
     public bool IsOptional;
 
+    /// <summary>
+    ///   If the parameter is an out param or not. Out params will be bound as different things for different
+    ///   languages. For example: [C#: Thing (out value)] [Python: (value) = Thing()]
+    /// </summary>
+    public bool IsOut;
+
     #endregion
 
-    public NParameter(string symbolName, string displayName, NType type, int position, bool isOptional)
+    public NParameter(ParameterInfo parameterInfo)
+    {
+      Type = NPrimitives.GetNTypeFromSystemType(parameterInfo.ParameterType);
+      if (Type == null) throw new Exception("Failed to load unknown primitive type: " + parameterInfo.ParameterType.FullName);
+      DisplayName = parameterInfo.Name.Humanize(LetterCasing.Title);
+      Position = parameterInfo.Position;
+      IsOptional = parameterInfo.IsOptional;
+      IsOut = parameterInfo.IsOut;
+    }
+
+    public NParameter(string symbolName, string displayName, NType type, int position, bool isOptional, bool isOut)
     {
       SymbolName = symbolName;
       DisplayName = displayName.Humanize(LetterCasing.Title);
       Type = type;
       Position = position;
       IsOptional = isOptional;
+      IsOut = isOut;
     }
   }
 }

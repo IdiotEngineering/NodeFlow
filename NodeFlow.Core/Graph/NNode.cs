@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NodeFlow.Core.Nodes;
 using NodeFlow.Core.Utilities;
 
@@ -30,23 +31,16 @@ namespace NodeFlow.Core.Graph
     public NNode Owner;
 
     /// <summary>
-    ///   Bound input parameters. Optional parameters don't need to be bound.
+    ///   Bound nput and return parameters. Optional parameters don't need to be bound.
     /// </summary>
-    public List<NParameterBinding> InputParameterBindings = new List<NParameterBinding>();
+    public List<NParameterBinding> ParameterBindings = new List<NParameterBinding>();
 
     /// <summary>
-    ///   Bound output parameters. Optional parameters don't need to be bound. Note that this
-    ///   is a one to many relationship.
+    ///   The implicit continuation after this node (default control flow ancor is bound). This can
+    ///   be null for two reasons: the node's output control flow ancor isn't bound to anything, or
+    ///   this is a node with explicit continuations (like a branch node).
     /// </summary>
-    public List<NParameterBinding> ReturnParameterBindings = new List<NParameterBinding>();
-
-    /// <summary>
-    ///   The continuation (control flow) binding for this node. Zero or more of these can
-    ///   be bound. For NContinuationSequencing.Single, only a single value will be in this
-    ///   dictionary, keyed as NControlFlowParameter.Implicit.
-    /// </summary>
-    public Dictionary<NControlFlowParameter, NNode> ContinuationBindings =
-      new Dictionary<NControlFlowParameter, NNode>();
+    public NNode ImplicitContinuation;
 
     #endregion
 
@@ -55,5 +49,10 @@ namespace NodeFlow.Core.Graph
       // Support return types
       return string.Format("private void {0}() {{ {1}(); }}", Guid, NodeDefinition.SymbolName);
     }
+
+    public IEnumerable<NParameter> GetUnboundExplicitContinuationParameters() =>
+      // Return all parameters that are actions and don't apear in the ParameterBinding list.
+      NodeDefinition.Parameters.Where(
+        p => p.Type == NPrimitives.NAction && ParameterBindings.All(pb => p != pb.SourceParameter));
   }
 }

@@ -20,24 +20,6 @@ namespace NodeFlow.Core.Nodes
     Implicit
   }
 
-  public enum NContinuationSequencing
-  {
-    /// <summary>
-    ///   The node does not call any node after it (used for properties and end-of-chain nodes).
-    /// </summary>
-    None,
-
-    /// <summary>
-    ///   The node has a single control flow edge leading out of it.
-    /// </summary>
-    Singular,
-
-    /// <summary>
-    ///   The node has explicitly controlled control-flow nodes leading out of it (like a branch node)
-    /// </summary>
-    Multiple
-  }
-
   /// <summary>
   ///   The definition of a single node. Note that despite the fact that an NNode is subclassed into
   ///   things like a NCallableNode, the definition (just like NType) is not subclassed.
@@ -79,32 +61,15 @@ namespace NodeFlow.Core.Nodes
     public string SymbolName;
 
     /// <summary>
-    ///   The input data types of this node, 0 or more.
+    ///   The input and return data types of this node, 0 or more.
     /// </summary>
-    public List<NParameter> InputParameters = new List<NParameter>();
-
-    /// <summary>
-    ///   The return data types of this node, 0 or more.
-    /// </summary>
-    public List<NParameter> ReturnParameters = new List<NParameter>();
+    public List<NParameter> Parameters = new List<NParameter>();
 
     /// <summary>
     ///   Sets the type of call (input control flow) sequencing for this node. Explicit for things that are
     ///   called, Implcicit for things that need to be called when their value is fetched (properties).
     /// </summary>
     public NCallSequencing CallSequencing = NCallSequencing.Explicit;
-
-    /// <summary>
-    ///   Sets the type of continuation (output control flow) sequencing for this node. Can have zero, one
-    ///   or many control continuation modes.
-    /// </summary>
-    public NContinuationSequencing ContinuationSequencing = NContinuationSequencing.Singular;
-
-    /// <summary>
-    ///   Optional continuation parameters. These are used if a node has explicit continuation set (takes in
-    ///   Action parameters).
-    /// </summary>
-    public List<NControlFlowParameter> ContinuationParameters = new List<NControlFlowParameter>();
 
     #endregion
 
