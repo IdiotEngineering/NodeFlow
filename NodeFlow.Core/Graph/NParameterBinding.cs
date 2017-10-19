@@ -34,7 +34,7 @@ namespace NodeFlow.Core.Graph
     ///   Rather than set an input NNode, primitive types can be bound to a literal value. This
     ///   is null otherwise.
     /// </summary>
-    public object LiteralValue;
+    public string LiteralValue;
 
     #endregion
 
@@ -52,7 +52,7 @@ namespace NodeFlow.Core.Graph
     /// <summary>
     ///   Creates a literal-value binding.
     /// </summary>
-    public NParameterBinding(NParameter targetParameter, NNode targetNode, object literalValue)
+    public NParameterBinding(NParameter targetParameter, NNode targetNode, string literalValue)
     {
       TargetParameter = targetParameter;
       TargetNode = targetNode;

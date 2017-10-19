@@ -41,11 +41,6 @@ namespace NodeFlow.Core.Graph
     public List<NParameterBinding> ReturnParameterBindings = new List<NParameterBinding>();
 
     /// <summary>
-    ///   All possible control flow inputs. Zero or more of them may actually be used.
-    /// </summary>
-    public List<NNode> PossibleControlFlowInputs = new List<NNode>();
-
-    /// <summary>
     ///   The continuation (control flow) binding for this node. Zero or more of these can
     ///   be bound. For NContinuationSequencing.Single, only a single value will be in this
     ///   dictionary, keyed as NControlFlowParameter.Implicit.

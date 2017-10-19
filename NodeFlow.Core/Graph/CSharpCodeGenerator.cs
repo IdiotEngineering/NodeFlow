@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 using HandlebarsDotNet;
 using NodeFlow.Core.Nodes;
 using NodeFlow.Core.Utilities;
+using System.Dynamic;
 
 namespace NodeFlow.Core.Graph
 {
@@ -39,7 +41,7 @@ namespace NodeFlow.Generated
     // Node [{{DisplayName}}:{{MethodName}}]{{#if ContinuationDispayName}} -> [{{ContinuationDispayName}}:{{ContinuationQualifiedName}}]{{/if}}
     public void {{MethodName}}()
     {
-      {{QualifiedName}}({{Params}});
+      {{QualifiedName}}({{{Params}}});
       {{#if ContinuationQualifiedName}}
       {{ContinuationQualifiedName}}();
       {{/if}}
@@ -101,11 +103,11 @@ namespace NodeFlow.Generated
           Params = string.Join(", ", node.InputParameterBindings.Select(param => new
           {
             Order = param.TargetParameter.Position,
-            Value = bindingToFieldName.ContainsKey(param) ? bindingToFieldName[param].ToString() : param.LiteralValue.ToString()
+            Value = bindingToFieldName.ContainsKey(param) ? bindingToFieldName[param].ToString() : param.LiteralValue
           }).Concat(node.ReturnParameterBindings.Select(param => new
           {
             Order = param.TargetParameter.Position,
-            Value = "out " + (bindingToFieldName.ContainsKey(param) ? bindingToFieldName[param].ToString() : param.LiteralValue.ToString())
+            Value = "out " + (bindingToFieldName.ContainsKey(param) ? bindingToFieldName[param].ToString() : param.LiteralValue)
           })).OrderBy(param => param.Order).Select(param => param.Value))
         })
       };
