@@ -3,7 +3,7 @@
 namespace NodeFlow.Core.Graph
 {
   /// <summary>
-  ///   A bound NParameter in an NGraph (a data connection between two NNodes). This is akin to
+  ///   A bound NParameterDefinition in an NGraph (a data connection between two NNodes). This is akin to
   ///   and edge in a graph.
   /// </summary>
   public class NParameterBinding
@@ -13,12 +13,12 @@ namespace NodeFlow.Core.Graph
     /// <summary>
     ///   The source parameter type this is bound to.
     /// </summary>
-    public NParameter SourceParameter;
+    public NParameterDefinition SourceParameterDefinition;
 
     /// <summary>
     ///   The target parameter type this is bound to. Probably the same as source.
     /// </summary>
-    public NParameter TargetParameter;
+    public NParameterDefinition TargetParameterDefinition;
 
     /// <summary>
     ///   The source node that generates the value for this parameter binding.
@@ -41,10 +41,10 @@ namespace NodeFlow.Core.Graph
     /// <summary>
     ///   Create a node-to-node binding.
     /// </summary>
-    public NParameterBinding(NParameter sourceParameter, NParameter targetParameter, NNode sourceNode, NNode targetNode)
+    public NParameterBinding(NParameterDefinition sourceParameterDefinition, NParameterDefinition targetParameterDefinition, NNode sourceNode, NNode targetNode)
     {
-      SourceParameter = sourceParameter;
-      TargetParameter = targetParameter;
+      SourceParameterDefinition = sourceParameterDefinition;
+      TargetParameterDefinition = targetParameterDefinition;
       SourceNode = sourceNode;
       TargetNode = targetNode;
     }
@@ -52,9 +52,9 @@ namespace NodeFlow.Core.Graph
     /// <summary>
     ///   Creates a literal-value binding.
     /// </summary>
-    public NParameterBinding(NParameter targetParameter, NNode targetNode, string literalValue)
+    public NParameterBinding(NParameterDefinition targetParameterDefinition, NNode targetNode, string literalValue)
     {
-      TargetParameter = targetParameter;
+      TargetParameterDefinition = targetParameterDefinition;
       TargetNode = targetNode;
       LiteralValue = literalValue;
     }

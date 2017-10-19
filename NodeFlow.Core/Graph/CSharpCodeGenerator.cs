@@ -22,13 +22,16 @@ namespace NodeFlow.Core.Graph
     ///   Rendered from a CGraph instance.
     /// </summary>
     private readonly string _templateString =
-      @"// Generated Code. Graph [ {{Guid}} ]
+      @"// Generated Code.
+// Graph [ {{Guid}} ]
+
 // ReSharper disable CheckNamespace
 // ReSharper disable InconsistentNaming
 // ReSharper disable RedundantNameQualifier
+
 namespace NodeFlow.Generated
 {
-  public class {{ClassName}} : NodeFlow.Core.Graph.NGeneratedGraph
+  public class {{ClassName}} : NodeFlow.Core.Runtime.NGeneratedGraph
   {
     #region Fields / Properties
 
@@ -75,12 +78,6 @@ namespace NodeFlow.Generated
     {{/Methods}}
 
     #endregion
-
-    // Used to hook the event handler node types. This will be called for each graph instance created.
-    protected override void RegisterEventHandlers()
-    {
-      throw new System.NotImplementedException();
-    }
   }
 }";
 

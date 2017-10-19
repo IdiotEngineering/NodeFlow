@@ -9,51 +9,51 @@ using NodeFlow.Core.Utilities;
 namespace NodeFlow.Core.Nodes
 {
   /// <summary>
-  ///   A single node module (akin to a Python Module, or a C# Assembly)
+  ///   A single node ModuleDefinition (akin to a Python ModuleDefinition, or a C# Assembly)
   /// </summary>
-  public class NModule
+  public class NModuleDefinition
   {
     #region Fields / Properties
 
     /// <summary>
-    ///   The core module that contains things like the build-in types.
+    ///   The core ModuleDefinition that contains things like the build-in types.
     /// </summary>
-    public static readonly NModule NCore = new NModule("Core", "NodeFlow.Core");
+    public static readonly NModuleDefinition NCore = new NModuleDefinition("Core", "NodeFlow.Core");
 
     /// <summary>
-    ///   The name displayed in the node editor UI for this module.
+    ///   The name displayed in the node editor UI for this ModuleDefinition.
     /// </summary>
     public readonly string DisplayName;
 
     /// <summary>
-    ///   The qualified (full, unique) DisplayName of the module.
+    ///   The qualified (full, unique) DisplayName of the ModuleDefinition.
     /// </summary>
     public readonly string QualifiedName;
 
     /// <summary>
-    ///   All types that are a member of this module (just like Assembly.Types)
+    ///   All types that are a member of this ModuleDefinition (just like Assembly.Types)
     /// </summary>
     public readonly Dictionary<string, NType> TypesByQualifiedNames = new Dictionary<string, NType>();
 
     /// <summary>
-    /// All function (both free and member) node definitions in this module.
+    /// All function (both free and member) node definitions in this ModuleDefinition.
     /// </summary>
     public readonly List<NNodeDefinition> Functions = new List<NNodeDefinition>(); 
 
     #endregion
 
-    private NModule(string displayName, string qualifiedName)
+    private NModuleDefinition(string displayName, string qualifiedName)
     {
       DisplayName = displayName.Humanize(LetterCasing.Title);
       QualifiedName = qualifiedName;
     }
 
     /// <summary>
-    /// Loads an NModule from a C# Assembly and a full namespace path.
+    /// Loads an NModuleDefinition from a C# Assembly and a full namespace path.
     /// </summary>
-    public static NModule LoadFromAssemblyNamespace(Assembly assembly, string namespc)
+    public static NModuleDefinition LoadFromAssemblyNamespace(Assembly assembly, string namespc)
     {
-      var module = new NModule(namespc.Split('.').Last(), namespc);
+      var module = new NModuleDefinition(namespc.Split('.').Last(), namespc);
       // TODO: Could do with a less inificient way of doing this
       var types = assembly.GetTypes().Where(type => type.Namespace == namespc);
       var statics = types.SelectMany(
@@ -71,7 +71,7 @@ namespace NodeFlow.Core.Nodes
         // Parameters (Input and Output)
         foreach (var parameter in method.GetParameters())
         {
-          nodeDefinition.Parameters.Add(new NParameter(parameter));
+          nodeDefinition.Parameters.Add(new NParameterDefinition(parameter));
         }
       }
       return module;

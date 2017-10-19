@@ -50,9 +50,9 @@ namespace NodeFlow.Core.Graph
       return string.Format("private void {0}() {{ {1}(); }}", Guid, NodeDefinition.SymbolName);
     }
 
-    public IEnumerable<NParameter> GetUnboundExplicitContinuationParameters() =>
+    public IEnumerable<NParameterDefinition> GetUnboundExplicitContinuationParameters() =>
       // Return all parameters that are actions and don't apear in the ParameterBinding list.
       NodeDefinition.Parameters.Where(
-        p => p.Type == NPrimitives.NAction && ParameterBindings.All(pb => p != pb.SourceParameter));
+        p => p.Type == NPrimitives.NAction && ParameterBindings.All(pb => p != pb.SourceParameterDefinition));
   }
 }

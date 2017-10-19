@@ -34,19 +34,19 @@ namespace NodeFlow.Core.CodeGeneration
 
     #endregion
 
-    public CParameter(NParameter nParameter, NParameterBinding nParameterBinding,
+    public CParameter(NParameterDefinition nParameterDefinition, NParameterBinding nParameterBinding,
       IReadOnlyDictionary<NParameterBinding, CField> bindingsToCFields, bool isLast)
     {
-      IsOut = nParameter.IsOut;
+      IsOut = nParameterDefinition.IsOut;
       NeedsComma = !isLast;
       if (nParameterBinding == null)
       {
-        if (!nParameter.IsOptional && nParameter.Type != NPrimitives.NAction)
+        if (!nParameterDefinition.IsOptional && nParameterDefinition.Type != NPrimitives.NAction)
           throw new Exception("Required parameter is not bound.");
-        IsUnboundOptional = nParameter.IsOptional;
-        IsUnboundContinuation = !nParameter.IsOptional;
+        IsUnboundOptional = nParameterDefinition.IsOptional;
+        IsUnboundContinuation = !nParameterDefinition.IsOptional;
       }
-      else if (nParameter.Type == NPrimitives.NAction)
+      else if (nParameterDefinition.Type == NPrimitives.NAction)
       {
         IsBoundContinuation = true;
         FieldNameOrValue = nParameterBinding.LiteralValue;
@@ -64,9 +64,9 @@ namespace NodeFlow.Core.CodeGeneration
       // If it's bound, save some meta-data aboud it for comments and debug code generation.
       if (nParameterBinding == null) return;
       SourceNodeGuid = nParameterBinding.SourceNode?.Guid.ToString();
-      SourceParamDisplayName = nParameterBinding.SourceParameter?.DisplayName;
+      SourceParamDisplayName = nParameterBinding.SourceParameterDefinition?.DisplayName;
       TargetNodeGuid = nParameterBinding.TargetNode.Guid.ToString();
-      TargetParamDisplayName = nParameterBinding.TargetParameter.DisplayName;
+      TargetParamDisplayName = nParameterBinding.TargetParameterDefinition.DisplayName;
     }
   }
 }

@@ -8,17 +8,17 @@ namespace NodeFlow.Core.Nodes
   {
     #region Fields / Properties
 
-    public static NType NNull = new NType("NNull", "NPrimitive.NNull", NModule.NCore);
+    public static NType NNull = new NType("NNull", "NPrimitive.NNull", NModuleDefinition.NCore);
 
     #endregion
 
-    public static NType NNumber = new NType("NNumber", "NPrimitive.NNumber", NModule.NCore);
-    public static NType NFloat = new NType("NFloat", "NPrimitive.NFloat", NModule.NCore);
-    public static NType NString = new NType("NString", "NPrimitive.NString", NModule.NCore);
-    public static NType NBoolean = new NType("NBoolean", "NPrimitive.NBoolean", NModule.NCore);
-    public static NType NEnum = new NType("NEnum", "NPrimitive.NEnum", NModule.NCore);
-    public static NType NObject = new NType("NObject", "NPrimitive.NObject", NModule.NCore);
-    public static NType NAction = new NType("NAction", "NPrimitive.NAction", NModule.NCore);
+    public static NType NNumber = new NType("NNumber", "NPrimitive.NNumber", NModuleDefinition.NCore);
+    public static NType NFloat = new NType("NFloat", "NPrimitive.NFloat", NModuleDefinition.NCore);
+    public static NType NString = new NType("NString", "NPrimitive.NString", NModuleDefinition.NCore);
+    public static NType NBoolean = new NType("NBoolean", "NPrimitive.NBoolean", NModuleDefinition.NCore);
+    public static NType NEnum = new NType("NEnum", "NPrimitive.NEnum", NModuleDefinition.NCore);
+    public static NType NObject = new NType("NObject", "NPrimitive.NObject", NModuleDefinition.NCore);
+    public static NType NAction = new NType("NAction", "NPrimitive.NAction", NModuleDefinition.NCore);
 
     public static Dictionary<Type, NType> CSharpToNTypeMap = new Dictionary<Type, NType>
     {

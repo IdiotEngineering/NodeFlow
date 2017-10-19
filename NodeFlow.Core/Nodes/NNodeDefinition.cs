@@ -41,9 +41,9 @@ namespace NodeFlow.Core.Nodes
     public NType Scope;
 
     /// <summary>
-    ///   The NModule this node is a member of (just like typeof(int).Assembly)
+    ///   The NModuleDefinition this node is a member of (just like typeof(int).Assembly)
     /// </summary>
-    public NModule Module;
+    public NModuleDefinition ModuleDefinition;
 
     /// <summary>
     ///   The human-readable name to display in the node's title (normally just the humanized function name)
@@ -63,7 +63,7 @@ namespace NodeFlow.Core.Nodes
     /// <summary>
     ///   The input and return data types of this node, 0 or more.
     /// </summary>
-    public List<NParameter> Parameters = new List<NParameter>();
+    public List<NParameterDefinition> Parameters = new List<NParameterDefinition>();
 
     /// <summary>
     ///   Sets the type of call (input control flow) sequencing for this node. Explicit for things that are
@@ -73,10 +73,10 @@ namespace NodeFlow.Core.Nodes
 
     #endregion
 
-    internal NNodeDefinition(NType scope, NModule module, string displayName, string description, string symbolName)
+    internal NNodeDefinition(NType scope, NModuleDefinition moduleDefinition, string displayName, string description, string symbolName)
     {
       Scope = scope;
-      Module = module;
+      ModuleDefinition = moduleDefinition;
       DisplayName = displayName.Humanize(LetterCasing.Title);
       Description = description;
       SymbolName = symbolName;

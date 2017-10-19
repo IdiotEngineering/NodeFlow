@@ -54,17 +54,19 @@
     <Compile Include="CodeGeneration\CMethod.cs" />
     <Compile Include="CodeGeneration\CParameter.cs" />
     <Compile Include="Graph\CSharpCodeGenerator.cs" />
-    <Compile Include="Graph\NGeneratedGraph.cs" />
+    <Compile Include="Runtime\NGeneratedGraph.cs" />
     <Compile Include="Graph\NGraph.cs" />
     <Compile Include="Graph\NParameterBinding.cs" />
     <Compile Include="Nodes\NControlFlowParameter.cs" />
-    <Compile Include="Nodes\NModule.cs" />
+    <Compile Include="Nodes\NModuleDefinition.cs" />
     <Compile Include="Graph\NNode.cs" />
     <Compile Include="Nodes\NNodeDefinition.cs" />
     <Compile Include="Nodes\NType.cs" />
-    <Compile Include="Nodes\NParameter.cs" />
+    <Compile Include="Nodes\NParameterDefinition.cs" />
     <Compile Include="Nodes\NPrimitiveTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\NModule.cs" />
+    <Compile Include="Runtime\NModuleRegistry.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\ShortSymbolGenerator.cs" />
   </ItemGroup>

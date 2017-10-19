@@ -14,7 +14,7 @@ namespace NodeFlow.UnitTests
     [TestMethod]
     public void LoadAssemblyNamespace()
     {
-      NModule.LoadFromAssemblyNamespace(Assembly.GetExecutingAssembly(), "NodeFlow.UnitTests");
+      NModuleDefinition.LoadFromAssemblyNamespace(Assembly.GetExecutingAssembly(), "NodeFlow.UnitTests");
     }
 
     [TestMethod]

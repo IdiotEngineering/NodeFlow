@@ -29,10 +29,10 @@ namespace NodeFlow.Core.CodeGeneration
       DisplayName = node.NodeDefinition.DisplayName;
       CallQualifiedName = node.NodeDefinition.SymbolName;
       ImplicitContinuation = node.ImplicitContinuation?.Guid.ToString();
-      // Start by creating a map of NParameter -> NBoundProperty
+      // Start by creating a map of NParameterDefinition -> NBoundProperty
       var nPropToBoundProps = node.NodeDefinition.Parameters.ToDictionary(nParameter => nParameter,
         nParameter => node.ParameterBindings.FirstOrDefault(binding =>
-          (nParameter.IsOut ? binding.SourceParameter : binding.TargetParameter) == nParameter));
+          (nParameter.IsOut ? binding.SourceParameterDefinition : binding.TargetParameterDefinition) == nParameter));
       // Generate a property for all NParameters in the NNode, not just the bound ones, in-order.
       Parameters = node.NodeDefinition.Parameters.Select((nParameter, index) =>
         new CParameter(nParameter,

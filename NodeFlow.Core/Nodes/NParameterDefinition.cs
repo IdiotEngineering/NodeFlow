@@ -7,7 +7,7 @@ namespace NodeFlow.Core.Nodes
   /// <summary>
   ///   Represents a single parameter for a node (think: an input Boolean called "IsScookum")
   /// </summary>
-  public class NParameter
+  public class NParameterDefinition
   {
     #region Fields / Properties
 
@@ -44,7 +44,7 @@ namespace NodeFlow.Core.Nodes
 
     #endregion
 
-    public NParameter(ParameterInfo parameterInfo)
+    public NParameterDefinition(ParameterInfo parameterInfo)
     {
       Type = NPrimitives.GetNTypeFromSystemType(parameterInfo.ParameterType);
       if (Type == null) throw new Exception("Failed to load unknown primitive type: " + parameterInfo.ParameterType.FullName);
@@ -54,7 +54,7 @@ namespace NodeFlow.Core.Nodes
       IsOut = parameterInfo.IsOut;
     }
 
-    public NParameter(string symbolName, string displayName, NType type, int position, bool isOptional, bool isOut)
+    public NParameterDefinition(string symbolName, string displayName, NType type, int position, bool isOptional, bool isOut)
     {
       SymbolName = symbolName;
       DisplayName = displayName.Humanize(LetterCasing.Title);

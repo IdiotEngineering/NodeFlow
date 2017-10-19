@@ -22,17 +22,17 @@ namespace NodeFlow.Core.Nodes
     public readonly string QualifiedName;
 
     /// <summary>
-    ///   The module the type is a member of.
+    ///   The ModuleDefinition the type is a member of.
     /// </summary>
-    public readonly NModule Module;
+    public readonly NModuleDefinition ModuleDefinition;
 
     #endregion
 
-    internal NType(string displayName, string qualifiedName, NModule module)
+    internal NType(string displayName, string qualifiedName, NModuleDefinition moduleDefinition)
     {
       DisplayName = displayName.Humanize(LetterCasing.Title);
       QualifiedName = qualifiedName;
-      Module = module;
+      ModuleDefinition = moduleDefinition;
     }
   }
 }

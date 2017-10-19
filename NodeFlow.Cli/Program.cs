@@ -6,32 +6,15 @@ using System.Reflection;
 using NodeFlow.Core.Annotations;
 using NodeFlow.Core.Graph;
 using NodeFlow.Core.Nodes;
+using NodeFlow.Core.Runtime;
 
 namespace NodeFlow.Cli
 {
   public class Program
   {
-    [NFunction("Prints the value to stdout.")]
-    public static void Print(string value, int intValue, string stringValue)
-    {
-      Console.WriteLine(value + intValue + stringValue);
-    }
-
-    [NFunction("The entry point into the graph.")]
-    public static void Begin(Action start, Action tick, out string value)
-    {
-      value = "Hello, world!! Woohooo.";
-    }
-
-    //[NFunction("A function with an explicit continuation")]
-    //public static void Branch(bool condition, Action isTrue, Action isFalse)
-    //{
-    //  if (condition) isTrue(); else isFalse();
-    //}
-
     private static void Main(string[] args)
     {
-      var module = NModule.LoadFromAssemblyNamespace(Assembly.GetExecutingAssembly(), "NodeFlow.Cli");
+      var module = NModuleDefinition.LoadFromAssemblyNamespace(Assembly.LoadFrom("NodeFlow.Core.Module.dll"), "NodeFlow.Core.Module");
       var nGraph = new NGraph();
       // Print
       var printNode = nGraph.MakeNewNode(module.Functions.First(f => f.DisplayName == "Print"));
@@ -58,6 +41,9 @@ namespace NodeFlow.Cli
       var codeGenerator = new CSharpCodeGenerator(nGraph);
       var code = codeGenerator.Compile();
       File.WriteAllText("../../Generated.cs", code);
+      // Module loading
+      var moduleRegistry = new NModuleRegistry();
+      moduleRegistry.AddModule(code);
     }
   }
 }

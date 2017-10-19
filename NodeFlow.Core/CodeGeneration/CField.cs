@@ -28,7 +28,7 @@ namespace NodeFlow.Core.CodeGeneration
     {
       ParameterBinding = binding;
       Name = generator.GetNextGuid().ToString();
-      QualifiedTypeName = NPrimitives.GetSystemTypeFromNType(binding.SourceParameter.Type).FullName;
+      QualifiedTypeName = NPrimitives.GetSystemTypeFromNType(binding.SourceParameterDefinition.Type).FullName;
       SourceNodeGuid = binding.SourceNode.Guid.ToString();
       SourceParamDisplayName = binding.SourceNode.NodeDefinition.DisplayName;
       TargetNodeGuid = binding.TargetNode.Guid.ToString();
